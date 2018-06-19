@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class HeroRabit : MonoBehaviour {
 
-    Rigidbody2D myBody = null;
+    public Rigidbody2D myBody = null;
     public float speed = 1;
     float diff = Time.deltaTime;
+
+    Animator anim = null;
+
+    public bool isBig = false;
 
     bool isGrounded = false;
     bool JumpActive = false;
@@ -14,11 +18,30 @@ public class HeroRabit : MonoBehaviour {
     public float MaxJumpTime = 2f;
     public float JumpSpeed = 2f;
 
+    Transform heroParent = null;
+
     // Use this for initialization
     void Start()
     {
         myBody = this.GetComponent<Rigidbody2D>();
         LevelController.current.setStartPosition(transform.position);
+        this.heroParent = this.transform.parent;
+        anim = this.GetComponent<Animator>();
+    }
+
+    static void SetNewParent(Transform obj, Transform new_parent)
+    {
+        if (obj.transform.parent != new_parent)
+        {
+            //Засікаємо позицію у Глобальних координатах
+            Vector3 pos = obj.transform.position;
+            //Встановлюємо нового батька
+            obj.transform.parent = new_parent;
+            //Після зміни батька координати кролика зміняться
+            //Оскільки вони тепер відносно іншого об’єкта
+            //повертаємо кролика в ті самі глобальні координати
+            obj.transform.position = pos;
+        }
     }
 
     // Update is called once per frame
@@ -90,6 +113,42 @@ public class HeroRabit : MonoBehaviour {
         {
             animator.SetBool("jump", true);
         }
+
+        //Згадуємо ground check
+        
+        if (hit)
+        {
+            //Перевіряємо чи ми опинились на платформі
+            if (hit.transform != null
+            && hit.transform.GetComponent<MovingPlatform>() != null)
+            {
+                //Приліпаємо до платформи
+                // SetNewParent(this.transform, hit.transform);
+                this.transform.parent = hit.transform;
+            }
+            else
+                this.transform.parent = null;
+            isGrounded = true;
+        }
+        else
+        {
+            //Ми в повітрі відліпаємо під платформи
+            SetNewParent(this.transform, this.heroParent);
+            isGrounded = false;
+        }
+    }
+
+    IEnumerator rabitDie()
+    {
+        this.anim.SetBool("death", true);
+        yield return new WaitForSeconds(2);
+        this.anim.SetBool("death", false);
+        LevelController.current.onRabitDeath(this);
+    }
+
+    public void callDeath()
+    {
+        StartCoroutine(rabitDie());
     }
 }
 
