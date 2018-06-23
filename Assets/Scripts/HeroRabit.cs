@@ -4,31 +4,55 @@ using UnityEngine;
 
 public class HeroRabit : MonoBehaviour {
 
-    public Rigidbody2D myBody = null;
-    public float speed = 1;
-    float diff = Time.deltaTime;
+    public static HeroRabit current;
 
+    public Rigidbody2D myBody = null;
     Animator anim = null;
+
+    public float speed = 2;
+  //  float diff = Time.deltaTime;
 
     public bool isBig = false;
 
     bool isGrounded = false;
     bool JumpActive = false;
     float JumpTime = 0f;
-    public float MaxJumpTime = 2f;
-    public float JumpSpeed = 2f;
+    public float MaxJumpTime = 0f;
+    public float JumpSpeed = 0f;
 
-    Transform heroParent = null;
+    //private int health = 1;
+
+    //Transform heroParent = null;
+
+    void Awake()
+    {
+        current = this;
+    }
+
+    public void jumpOfOrk()
+    {
+        this.JumpActive = true;
+        this.JumpTime += Time.deltaTime;
+        if (this.JumpTime < this.MaxJumpTime)
+        {
+            Vector2 vel = myBody.velocity;
+            vel.y = JumpSpeed * (1.0f - JumpTime / MaxJumpTime);
+            myBody.velocity = vel;
+        }
+        this.JumpActive = false;
+    }
 
     // Use this for initialization
     void Start()
     {
         myBody = this.GetComponent<Rigidbody2D>();
-        LevelController.current.setStartPosition(transform.position);
-        this.heroParent = this.transform.parent;
         anim = this.GetComponent<Animator>();
+        LevelController.current.setStartPosition(transform.position);
+
+        //this.heroParent = this.transform.parent;
     }
 
+    /*
     static void SetNewParent(Transform obj, Transform new_parent)
     {
         if (obj.transform.parent != new_parent)
@@ -42,7 +66,7 @@ public class HeroRabit : MonoBehaviour {
             //повертаємо кролика в ті самі глобальні координати
             obj.transform.position = pos;
         }
-    }
+    }*/
 
     // Update is called once per frame
     void Update () {
@@ -133,17 +157,30 @@ public class HeroRabit : MonoBehaviour {
         else
         {
             //Ми в повітрі відліпаємо під платформи
-            SetNewParent(this.transform, this.heroParent);
+            //SetNewParent(this.transform, this.heroParent);
             isGrounded = false;
         }
     }
 
     IEnumerator rabitDie()
     {
-        this.anim.SetBool("death", true);
-        yield return new WaitForSeconds(2);
-        this.anim.SetBool("death", false);
+        this.anim.SetBool("die", true);
+        yield return new WaitForSeconds(1);
+        this.anim.SetBool("die", false);
         LevelController.current.onRabitDeath(this);
+    }
+
+    public void removeHealth(int i)
+    {
+        StartCoroutine(rabitDie());
+        //health -= i;
+    }
+
+    int health = 3;
+
+    public bool isDead()
+    {
+        return health == 0;
     }
 
     public void callDeath()
