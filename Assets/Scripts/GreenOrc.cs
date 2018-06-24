@@ -47,7 +47,7 @@ public class GreenOrc : MonoBehaviour {
     public void callAttack()
     {
         StartCoroutine(orkAttack());
-        HeroRabit.current.removeHealth(1);
+        HeroRabit.current.callDeath();
     }
 
     float getDirection()

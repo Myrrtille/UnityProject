@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HeroRabit : MonoBehaviour {
 
@@ -20,7 +22,12 @@ public class HeroRabit : MonoBehaviour {
     public float MaxJumpTime = 0f;
     public float JumpSpeed = 0f;
 
-    //private int health = 1;
+    public bool game = true;
+
+    private int health = 3;
+    public Image life1;
+    public Image life2;
+    public Image life3;
 
     //Transform heroParent = null;
 
@@ -172,11 +179,18 @@ public class HeroRabit : MonoBehaviour {
 
     public void removeHealth(int i)
     {
-        StartCoroutine(rabitDie());
-        //health -= i;
+        health -= i;
+        if (health == 2)
+            life3.enabled = false;
+        else if (health == 1)
+            life2.enabled = false;
+        else if (health == 0)
+            life1.enabled = false;
+        else
+        {
+            SceneManager.LoadScene("ChooseLevel");
+        }
     }
-
-    int health = 3;
 
     public bool isDead()
     {
@@ -186,6 +200,7 @@ public class HeroRabit : MonoBehaviour {
     public void callDeath()
     {
         StartCoroutine(rabitDie());
+        removeHealth(1);
     }
 }
 
