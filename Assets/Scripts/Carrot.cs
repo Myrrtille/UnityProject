@@ -9,7 +9,7 @@ public class Carrot : Collectable {
 
     protected override void OnRabitHit(HeroRabit rabit)
     {
-        rabit.removeHealth(1);
+        rabit.removeHealth();
         this.CollectedHide();
     }
 

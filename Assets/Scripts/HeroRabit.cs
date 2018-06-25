@@ -143,6 +143,7 @@ public class HeroRabit : MonoBehaviour {
         else
         {
             animator.SetBool("jump", true);
+            animator.SetBool("run", false);
         }
 
         //Згадуємо ground check
@@ -172,24 +173,44 @@ public class HeroRabit : MonoBehaviour {
     IEnumerator rabitDie()
     {
         this.anim.SetBool("die", true);
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.2f);
         this.anim.SetBool("die", false);
         LevelController.current.onRabitDeath(this);
     }
 
-    public void removeHealth(int i)
+    public void removeHealth()
     {
-        health -= i;
-        if (health == 2)
-            life3.enabled = false;
-        else if (health == 1)
-            life2.enabled = false;
-        else if (health == 0)
-            life1.enabled = false;
+        if (isBig)
+        {
+            isBig = false;
+            myBody.transform.localScale -= new Vector3(0.5F, 0.5F, 0);
+        }
+        if (!isDead())
+        {
+            health--;
+            if (health == 2)
+                life3.enabled = false;
+            else if (health == 1)
+                life2.enabled = false;
+            else if (health == 0)
+                life1.enabled = false;
+        }
         else
         {
             SceneManager.LoadScene("ChooseLevel");
         }
+    }
+
+    public void addHealth()
+    {
+        if (health == 2)
+            life3.enabled = true;
+        else if (health == 1)
+            life2.enabled = true;
+        else if (health == 0)
+            life1.enabled = true;
+        if(health < 3)
+            health++;
     }
 
     public bool isDead()
@@ -200,7 +221,7 @@ public class HeroRabit : MonoBehaviour {
     public void callDeath()
     {
         StartCoroutine(rabitDie());
-        removeHealth(1);
+        removeHealth();
     }
 }
 

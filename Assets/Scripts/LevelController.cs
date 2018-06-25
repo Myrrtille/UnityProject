@@ -16,7 +16,7 @@ public class LevelController : MonoBehaviour
     public Text FruitsCounter;
     public int amountOfFruits = 0;
     private int collectedFruits = 0;
-
+    
     void Awake()
     {
         current = this;
@@ -34,6 +34,7 @@ public class LevelController : MonoBehaviour
             label += coins;
             CoinsCounter.text = label;
         }
+        
     }
 
     Vector3 startingPosition;

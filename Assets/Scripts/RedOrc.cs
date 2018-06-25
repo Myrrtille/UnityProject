@@ -44,7 +44,12 @@ public class RedOrc : MonoBehaviour {
     {
         //this.anim.SetTrigger("attack");
         StartCoroutine(orkAttack());
-        HeroRabit.current.removeHealth(1);
+        if (HeroRabit.current.isBig)
+        {
+            HeroRabit.current.isBig = false;
+            HeroRabit.current.myBody.transform.localScale -= new Vector3(0.5F, 0.5F, 0);
+        }
+        else HeroRabit.current.callDeath();
     }
 
     float getDirection()

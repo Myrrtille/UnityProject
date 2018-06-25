@@ -9,81 +9,43 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1094452634333534}
+  m_RootGameObject: {fileID: 1512626814711280}
   m_IsPrefabParent: 1
---- !u!1 &1094452634333534
+--- !u!1 &1512626814711280
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4057264896939216}
-  - component: {fileID: 212384627886076920}
-  - component: {fileID: 61557475095449368}
-  - component: {fileID: 114321744531170444}
+  - component: {fileID: 4960098241030776}
+  - component: {fileID: 212059435128715210}
   m_Layer: 0
-  m_Name: mushroom
+  m_Name: tree-flowered-1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4057264896939216
+--- !u!4 &4960098241030776
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1094452634333534}
+  m_GameObject: {fileID: 1512626814711280}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5166304, y: -0.45332468, z: 0}
+  m_LocalPosition: {x: 22.716253, y: 1.9304788, z: 91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61557475095449368
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1094452634333534}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.74666667, y: 0.70666665}
-    newSize: {x: 0.74666667, y: 0.70666665}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.74666667, y: 0.70666665}
-  m_EdgeRadius: 0
---- !u!114 &114321744531170444
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1094452634333534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff1e561f6c2a3184ca31d8e85041943d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!212 &212384627886076920
+--- !u!212 &212059435128715210
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1094452634333534}
+  m_GameObject: {fileID: 1512626814711280}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -110,12 +72,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 489c5941e41184fe6b482001164f4cef, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5bbec56a4fc964a8b9e096b9d0cca1ae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.74666667, y: 0.70666665}
+  m_Size: {x: 1.87, y: 2.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

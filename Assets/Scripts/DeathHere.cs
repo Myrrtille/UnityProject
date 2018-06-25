@@ -15,7 +15,7 @@ public class DeathHere : MonoBehaviour
         {
             //Повідомляємо рівень, про смерть кролика
             if (rabit.game)
-                rabit.removeHealth(1);
+                rabit.removeHealth();
             LevelController.current.onRabitDeath(rabit);
         }
     }
